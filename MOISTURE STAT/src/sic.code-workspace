@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"path": "../.."
+		},
+		{
+			"name": "MOISTURE STAT",
+			"path": ".."
+		},
+		{
+			"name": "DF",
+			"path": "../../../PlatformIO/Projects/DF"
+		}
+	],
+	"settings": {}
+}
