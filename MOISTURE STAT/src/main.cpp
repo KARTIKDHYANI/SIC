@@ -59,8 +59,12 @@ void setup(){
     request->send_P(200, "text/plain", "babu");
   });
   server.on("/moisture", HTTP_GET, [](AsyncWebServerRequest *request){
-    request->send_P(200, "text/plain", String(calcMoist()).c_str());
-  });
+    String moistureValue = String(calcMoist());
+    AsyncWebServerResponse *response = request->beginResponse(200, "text/plain", moistureValue);
+    response->addHeader("Access-Control-Allow-Origin", "*"); // Allow requests from any origin
+    request->send(response);
+});
+
   
   server.on("/status", HTTP_POST, [](AsyncWebServerRequest *request){
     Serial.println("Received POST request to /status");

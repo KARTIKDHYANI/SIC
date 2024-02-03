@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Irrigation Settings</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+
+        form {
+            width: 300px; /* Adjust the width as needed */
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        select, input[type="number"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>Irrigation Settings</h1>
+    <form action="/irrigation" method="POST">
+        <label for="irrigation_hour">Set Hour:</label>
+        <select id="irrigation_hour" name="irrigation_hour" required>
+            <!-- Options for hour (00 to 23) -->
+            {% for hour in range(24) %}
+                <option value="{{ "%02d"|format(hour) }}">{{ "%02d"|format(hour) }}</option>
+            {% endfor %}
+        </select>
+
+        <label for="irrigation_minute">Set Minute:</label>
+        <select id="irrigation_minute" name="irrigation_minute" required>
+            <!-- Options for minute (00 to 59) -->
+            {% for minute in range(60) %}
+                <option value="{{ "%02d"|format(minute) }}">{{ "%02d"|format(minute) }}</option>
+            {% endfor %}
+        </select><br><br>
+        
+        <label for="water_flow_time">Set Time for Water Flow (minutes):</label>
+        <input type="number" id="water_flow_time" name="water_flow_time" required><br><br>
+        
+        <button type="submit">Submit</button>
+    </form>
+    
+    <form action="/stop_irrigation" method="POST">
+        <button type="submit">Stop Irrigation</button>
+    </form>
+    
+    <form action="/">
+        <button type="submit">Back</button>
+    </form>
+</body>
+</html>

@@ -44,7 +44,7 @@ class CSVHandler:
         plt.xlabel(self.col1_name)
         plt.ylabel(self.col2_name)
         plt.title("Plot of {} vs {}".format(self.col1_name, self.col2_name))
-        plt.savefig('fig.png')
+        plt.savefig('templates/fig.png')
         
 
 

@@ -7,15 +7,16 @@ while True:
     
     ob1 = CSVHandler('Data.csv', 'Time', 'Moisture level')
 
-    ob1.insert_data((datetime.now().strftime("%H:%M"),m.get_moisture_data() ))
+    ob1.insert_data((datetime.now().strftime("%H:%M"),m.get_moisture_data()))
+    
     time.sleep(60)
     ob1.insert_data((datetime.now().strftime("%H:%M"),m.get_moisture_data()))
     time.sleep(60)
-    ob1.insert_data((datetime.now().strftime("%H:%M"),m.get_moisture_data() ))
+    ob1.insert_data((datetime.now().strftime("%H:%M"),m.get_moisture_data()))
     time.sleep(60)
-    ob1.insert_data((datetime.now().strftime("%H:%M"), m.get_moisture_data()))
+    ob1.insert_data((datetime.now().strftime("%H:%M"),m.get_moisture_data()))
     time.sleep(60)
-    ob1.insert_data((datetime.now().strftime("%H:%M"),m.get_moisture_data() ))
+    ob1.insert_data((datetime.now().strftime("%H:%M"),m.get_moisture_data()))
     time.sleep(60)
 
     ob1.plot_data()
