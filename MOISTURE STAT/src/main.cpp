@@ -1,15 +1,60 @@
 #include <Arduino.h>
-int calcMoist();
-/*
+
+/*********
   Rui Santos
-  Complete project details at https://RandomNerdTutorials.com/esp32-client-server-wi-fi/
-  
-  Permission is hereby granted, free of charge, to any person obtaining a copy
-  of this software and associated documentation files.
-  
-  The above copyright notice and this permission notice shall be included in all
-  copies or substantial portions of the Software.
-*/
+  Complete project details at https://randomnerdtutorials.com  
+*********/
+
+// Motor A
+int motor1Pin1 = 27; 
+int motor1Pin2 = 26; 
+int enable1Pin = 14; 
+
+// Setting PWM properties
+const int freq = 30000;
+const int pwmChannel = 0;
+const int resolution = 8;
+int dutyCycle = 200;
+
+
+
+
+void moveForward() {
+  Serial.println("Moving Forward");
+  digitalWrite(motor1Pin1, LOW);
+  digitalWrite(motor1Pin2, HIGH); 
+  delay(2000);
+}
+
+void stopMotor() {
+  Serial.println("Motor stopped");
+  digitalWrite(motor1Pin1, LOW);
+  digitalWrite(motor1Pin2, LOW);
+  delay(1000);
+}
+
+void moveBackwards() {
+  Serial.println("Moving Backwards");
+  digitalWrite(motor1Pin1, HIGH);
+  digitalWrite(motor1Pin2, LOW); 
+  delay(2000);
+}
+
+void moveForwardIncreasingSpeed() {
+  digitalWrite(motor1Pin1, HIGH);
+  digitalWrite(motor1Pin2, LOW);
+  while (dutyCycle <= 255){
+    ledcWrite(pwmChannel, dutyCycle);   
+    Serial.print("Forward with duty cycle: ");
+    Serial.println(dutyCycle);
+    dutyCycle = dutyCycle + 5;
+    delay(500);
+  }
+  dutyCycle = 200;
+}
+
+int calcMoist();
+
 int _moisture,sensor_analog;
 char moisture[20];
 const int sensor_pin = A0;
@@ -36,6 +81,15 @@ AsyncWebServer server(80);
 
 
 void setup(){
+   pinMode(motor1Pin1, OUTPUT);
+  pinMode(motor1Pin2, OUTPUT);
+  pinMode(enable1Pin, OUTPUT);
+  
+  // configure LED PWM functionalitites
+  ledcSetup(pwmChannel, freq, resolution);
+  
+  // attach the channel to the GPIO to be controlled
+  ledcAttachPin(enable1Pin, pwmChannel);
     pinMode(2, OUTPUT);
 
     
@@ -93,5 +147,12 @@ return _moisture;
 
 }
 void loop(){
+  while(status)
+  {
+      digitalWrite(2,status);
+       moveForward();
+
+  }
   digitalWrite(2,status);
+  stopMotor();
 }

@@ -26,7 +26,7 @@ while True:
     
     # Compare irrigation hour and minute with current hour and minute
     if irrigation_hour == current_hour and irrigation_minute == current_minute and m.get_moisture_data()<80:
-        
+        print(True)
         s.poststat(1)
         time.sleep(water_flow_time*60)
         s.poststat(0)

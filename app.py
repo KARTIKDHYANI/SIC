@@ -11,8 +11,8 @@ app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 
 s=stat()
 # Placeholder variable for moisture level (in %)
-moisture_level =m.get_moisture_data()
-
+#moisture_level =m.get_moisture_data()
+moisture_level =75
 @app.route('/')
 def index():
     return render_template('index.html', moisture_level=moisture_level)
